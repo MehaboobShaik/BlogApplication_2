@@ -1,11 +1,16 @@
 package com.blogApp.models;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.NamedNativeQueries;
-import javax.persistence.NamedNativeQuery;
+import javax.persistence.OneToMany;
 
 @Entity
 public class User {
@@ -62,6 +67,23 @@ public class User {
 	public String toString() {
 		return "User [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password + ", about=" + about
 				+ "]";
+	}
+	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	Set<Posts> set =new HashSet<Posts>();
+	public Set<Posts> getSet() {
+		return set;
+	}
+	public void setSet(Set<Posts> set) {
+		this.set = set;
+	}
+	public User(int id, String name, String email, String password, String about, Set<Posts> set) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.email = email;
+		this.password = password;
+		this.about = about;
+		this.set = set;
 	}
 	
 }
