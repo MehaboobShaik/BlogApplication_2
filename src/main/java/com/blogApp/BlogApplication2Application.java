@@ -26,7 +26,8 @@ public class BlogApplication2Application implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		 
-		System.out.println("ABC");
+		System.out.println(this.encoder.encode("ABC"));
+		System.out.println("BlogApplication2Application.run()");
 		
 	}
 	
