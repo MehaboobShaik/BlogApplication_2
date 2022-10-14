@@ -28,14 +28,12 @@ public class BlogApplication2Application implements CommandLineRunner{
 		 
 
 		System.out.println("BlogApplication2Application.run()");
-
-		System.out.println(this.encoder.encode("ABC"));
+        System.out.println(this.encoder.encode("ABC"));
 		System.out.println("BlogApplication2Application.run()");
 		System.out.println("BlogApplication2Application.run()");
 
 
 
-		
 	}
 	
 }
