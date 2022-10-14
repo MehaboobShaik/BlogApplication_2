@@ -2,6 +2,8 @@ package com.blogApp.controllers;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,7 +28,7 @@ public class UserContoller {
 	private UserService userService;
 	
 	@PostMapping("/createuser")
-	public ResponseEntity<UserDto> createUser(@RequestBody UserDto userDto){
+	public ResponseEntity<UserDto> createUser(@Valid @RequestBody UserDto userDto){
 		UserDto createUser = this.userService.createUser(userDto);
 		return new ResponseEntity<UserDto>(createUser,HttpStatus.CREATED);
 	}

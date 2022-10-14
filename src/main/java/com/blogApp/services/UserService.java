@@ -16,4 +16,6 @@ public interface UserService {
 	public void DeleteUSer(Integer userId);
 	public UserDto getUSer(Integer userId);
 	public List<UserDto> getAllUSers();
+	
+	
 }
