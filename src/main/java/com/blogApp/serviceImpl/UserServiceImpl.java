@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.blogApp.Repository.UserRepository;
@@ -22,9 +23,13 @@ public class UserServiceImpl implements UserService{
 	@Autowired
 	private ModelMapper modelMapper;
 	
+	@Autowired
+	private PasswordEncoder encoder;
+	
 	@Override
 	public UserDto createUser(UserDto userDto) {
 		User user = this.modelMapper.map(userDto, User.class);
+		user.setPassword(this.encoder.encode(userDto.getPassword()));
 		User InsertedUser = this.userRepository.save(user);
 		UserDto userDto2 = this.modelMapper.map(InsertedUser, UserDto.class);
 		return userDto2;
@@ -34,11 +39,18 @@ public class UserServiceImpl implements UserService{
 	public UserDto UpdateUser(UserDto userDto, Integer userId) {
 	  
 	   User user = this.userRepository.findById(userId).orElseThrow(()-> new ResourceNotFoundException("user","id", userId));
-	   
+	   if(userDto.getName()!=null) {
 	   user.setName(userDto.getName());
+	   }
+	   if(userDto.getEmail()!=null) {
 	   user.setEmail(userDto.getEmail());
-	   user.setPassword(user.getPassword());
+	   }
+	   if(userDto.getPassword()!=null) {
+	   user.setPassword(this.encoder.encode(userDto.getPassword()));
+	   }
+	   if(userDto.getAbout()!=null) {
 	   user.setAbout(userDto.getAbout());
+	   }
 	   User updatedUser = this.userRepository.save(user);
 	   UserDto userDto2 = this.modelMapper.map(updatedUser, UserDto.class);
 	   return userDto2;

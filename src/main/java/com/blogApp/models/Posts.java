@@ -1,10 +1,16 @@
 package com.blogApp.models;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 
 @Entity
@@ -83,5 +89,39 @@ public class Posts {
 	public void setCategory(Category category) {
 		this.category = category;
 	}
+	
+	@OneToMany(mappedBy = "posts",cascade = CascadeType.ALL)
+	Set<Comment> commentSet =new HashSet<Comment>();
+
+	public Posts(int id, String title, String content, String image, User user, Category category,
+			Set<Comment> commentSet) {
+		super();
+		this.id = id;
+		this.title = title;
+		this.content = content;
+		this.image = image;
+		this.user = user;
+		this.category = category;
+		this.commentSet = commentSet;
+	}
+
+
+	public Set<Comment> getCommentSet() {
+		return commentSet;
+	}
+
+
+	public void setCommentSet(Set<Comment> commentSet) {
+		this.commentSet = commentSet;
+	}
+
+
+
+
+    
+
+
+	
+
 	
 }
