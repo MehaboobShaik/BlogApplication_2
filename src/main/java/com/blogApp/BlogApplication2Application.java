@@ -27,6 +27,7 @@ public class BlogApplication2Application implements CommandLineRunner{
 	public void run(String... args) throws Exception {
 		 
 		System.out.println(this.encoder.encode("ABC"));
+		System.out.println("BlogApplication2Application.run()");
 		
 	}
 	
