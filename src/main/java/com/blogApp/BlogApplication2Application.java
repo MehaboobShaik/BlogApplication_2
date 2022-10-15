@@ -43,7 +43,6 @@ public class BlogApplication2Application implements CommandLineRunner{
 	             role2.setName("ROLE_NORMAL");
 	             List<Role> roles = List.of(role,role2);
 	             List<Role> saveAll = roleRespository.saveAll(roles);
-	             System.out.println("BlogApplication2Application.run()");
 		}catch (Exception e) {
 			
 			e.getMessage();
