@@ -9,9 +9,9 @@ import javax.persistence.Id;
 public class Role {
 
 	@Id
-	@GeneratedValue(strategy =  GenerationType.IDENTITY)
 	private int id;
 	private String  name;
+	
 	public Role(int id, String name) {
 		super();
 		this.id = id;
