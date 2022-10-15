@@ -1,5 +1,7 @@
 package com.blogApp.customexceptions;
 
+
+import java.nio.file.AccessDeniedException;
 import java.util.HashMap;
 import java.util.List;
 
@@ -31,6 +33,12 @@ public class GlobalException {
 		   
 		}
 		return new ResponseEntity<Object>(map,HttpStatus.BAD_REQUEST);
+	}
+	@ExceptionHandler(AccessDeniedException.class)
+	public ResponseEntity<ApiResponse> accessDeniedException(AccessDeniedException ex) {
+		String message = ex.getMessage();
+		ApiResponse apiResponse = new ApiResponse("you dont have a access to perform this operation",false);
+        return new ResponseEntity<ApiResponse>(apiResponse,HttpStatus.EXPECTATION_FAILED);
 	}
 	
 }

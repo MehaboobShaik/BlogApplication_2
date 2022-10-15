@@ -10,7 +10,9 @@ import com.blogApp.modelDto.UserDto;
 
 @Service
 public interface UserService {
-            
+    
+	public UserDto registerUser(UserDto userDto);
+	
 	public UserDto createUser(UserDto userDto);
 	public UserDto UpdateUser(UserDto userDto,Integer userID) throws ResourceNotFoundException;
 	public void DeleteUSer(Integer userId);

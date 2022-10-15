@@ -1,9 +1,14 @@
 package com.blogApp.modelDto;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+
+import com.blogApp.models.Role;
 
 public class UserDto {
 
@@ -27,8 +32,16 @@ public class UserDto {
 	@Size(min = 20, max =200 ,message = "minimum of 20 charecters and max 200." )
 	private String about;
 	
+	Set<RoleDto> roleSet =new HashSet<RoleDto>();
+	
 	public int getId() {
 		return id;
+	}
+	public Set<RoleDto> getRoleSet() {
+		return roleSet;
+	}
+	public void setRoleSet(Set<RoleDto> roleSet) {
+		this.roleSet = roleSet;
 	}
 	public void setId(int id) {
 		this.id = id;
