@@ -8,9 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.blogApp.Repository.RoleRespository;
 import com.blogApp.Repository.UserRepository;
 import com.blogApp.customexceptions.ResourceNotFoundException;
 import com.blogApp.modelDto.UserDto;
+import com.blogApp.models.Role;
 import com.blogApp.models.User;
 import com.blogApp.services.UserService;
 
@@ -22,6 +24,9 @@ public class UserServiceImpl implements UserService{
 	
 	@Autowired
 	private ModelMapper modelMapper;
+	
+	@Autowired
+	private RoleRespository roleRespository;
 	
 	@Autowired
 	private PasswordEncoder encoder;
@@ -76,6 +81,17 @@ public class UserServiceImpl implements UserService{
          List<User> users = this.userRepository.findAll();
          List<UserDto> collect = users.stream().map(user ->modelMapper.map(user, UserDto.class)).collect(Collectors.toList());
 		return collect;
+	}
+
+	@Override
+	public UserDto registerUser(UserDto userDto) {
+		User user = this.modelMapper.map(userDto, User.class);
+		user.setPassword(this.encoder.encode(userDto.getPassword()));
+		Role role = roleRespository.findById(502).get();
+		user.getRoleSet().add(role);
+		User user2 = this.userRepository.save(user);
+		UserDto userDto2 = this.modelMapper.map(user2, UserDto.class);
+		return userDto2;
 	}
 
 	

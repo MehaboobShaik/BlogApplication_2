@@ -7,6 +7,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -38,7 +39,7 @@ public class UserContoller {
 		UserDto updateUser = this.userService.UpdateUser(userDto,userId);
 		return new ResponseEntity<UserDto>(updateUser,HttpStatus.CREATED);
 	}
-	
+	@PreAuthorize("hasRole('ADMIN')")
 	@DeleteMapping("/deleteuser/{userId}")
 	public ResponseEntity<ApiResponse> DeleteUser(@PathVariable Integer userId){
 		this.userService.DeleteUSer(userId);
@@ -54,5 +55,12 @@ public class UserContoller {
 	public ResponseEntity<List<UserDto>> getAlluser(){
 		 List<UserDto> allUSers = this.userService.getAllUSers();
 		return new ResponseEntity<List<UserDto>>(allUSers,HttpStatus.FOUND);
+	}
+	
+	//registerNerUser
+	@PostMapping("/register")
+	public ResponseEntity<UserDto> registerUser(@RequestBody UserDto userDto){
+		UserDto registerUser = this.userService.registerUser(userDto);
+		return new ResponseEntity<UserDto>(registerUser,HttpStatus.CREATED);
 	}
 }
