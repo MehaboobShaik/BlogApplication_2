@@ -11,13 +11,13 @@ import com.blogApp.modelDto.UserDto;
 @Service
 public interface UserService {
     
-	public UserDto registerUser(UserDto userDto);
+	public UserDto registerUser(UserDto userDto,Integer roleId);
 	
 	public UserDto createUser(UserDto userDto);
 	public UserDto UpdateUser(UserDto userDto,Integer userID) throws ResourceNotFoundException;
-	public void DeleteUSer(Integer userId);
+	public String DeleteUSer(Integer userId);
 	public UserDto getUSer(Integer userId);
-	public List<UserDto> getAllUSers();
+	public List<UserDto> getAllUsers();
 	
 	
 }

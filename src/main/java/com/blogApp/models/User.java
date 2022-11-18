@@ -32,6 +32,19 @@ public class User  implements UserDetails{
 	private String email;
 	private String password;
 	private String about;
+	
+	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	Set<Posts> set =new HashSet<Posts>();
+	
+	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	Set<Comment> commentSet =new HashSet<Comment>();
+	
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinTable(name="user_role",
+	joinColumns = @JoinColumn(name="user",referencedColumnName = "id"),
+	inverseJoinColumns = @JoinColumn(name="role",referencedColumnName ="id"))
+	Set<Role> roleSet =new HashSet<Role>();
+	
 	public User() {
 		super();
 	}
@@ -42,6 +55,39 @@ public class User  implements UserDetails{
 		this.email = email;
 		this.password = password;
 		this.about = about;
+	}
+	
+	public User(int id, String name, String email, String password, String about, Set<Role> roleSet) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.email = email;
+		this.password = password;
+		this.about = about;
+		this.roleSet = roleSet;
+	}
+	public User(int id, String name, String email, String password, String about, Set<Posts> set,
+			Set<Comment> commentSet) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.email = email;
+		this.password = password;
+		this.about = about;
+		this.set = set;
+		this.commentSet = commentSet;
+	}
+	public User(int id, String name, String email, String password, String about, Set<Posts> set,
+			Set<Comment> commentSet, Set<Role> roleSet) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.email = email;
+		this.password = password;
+		this.about = about;
+		this.set = set;
+		this.commentSet = commentSet;
+		this.roleSet = roleSet;
 	}
 	public int getId() {
 		return id;
@@ -73,65 +119,19 @@ public class User  implements UserDetails{
 	public void setAbout(String about) {
 		this.about = about;
 	}
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password + ", about=" + about
-				+ "]";
-	}
-	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	Set<Posts> set =new HashSet<Posts>();
+
 	public Set<Posts> getSet() {
 		return set;
 	}
 	public void setSet(Set<Posts> set) {
 		this.set = set;
 	}
-	public User(int id, String name, String email, String password, String about, Set<Posts> set) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.email = email;
-		this.password = password;
-		this.about = about;
-		this.set = set;
-	}
-	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	Set<Comment> commentSet =new HashSet<Comment>();
+	
 	public Set<Comment> getCommentSet() {
 		return commentSet;
 	}
 	public void setCommentSet(Set<Comment> commentSet) {
 		this.commentSet = commentSet;
-	}
-	public User(int id, String name, String email, String password, String about, Set<Posts> set,
-			Set<Comment> commentSet) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.email = email;
-		this.password = password;
-		this.about = about;
-		this.set = set;
-		this.commentSet = commentSet;
-	}
-	
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinTable(name="user_role",
-	joinColumns = @JoinColumn(name="user",referencedColumnName = "id"),
-	inverseJoinColumns = @JoinColumn(name="role",referencedColumnName ="id"))
-	Set<Role> roleSet =new HashSet<Role>();
-	
-	public User(int id, String name, String email, String password, String about, Set<Posts> set,
-			Set<Comment> commentSet, Set<Role> roleSet) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.email = email;
-		this.password = password;
-		this.about = about;
-		this.set = set;
-		this.commentSet = commentSet;
-		this.roleSet = roleSet;
 	}
 	public Set<Role> getRoleSet() {
 		return roleSet;
@@ -170,7 +170,16 @@ public class User  implements UserDetails{
 		// TODO Auto-generated method stub
 		return true;
 	}
-	
+//	@Override
+//	public String toString() {
+//		return "User [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password + ", about=" + about
+//				+ "]";
+//	}
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password + ", about=" + about
+				+ ", roleSet=" + roleSet + "]";
+	}
 	
 	
 }

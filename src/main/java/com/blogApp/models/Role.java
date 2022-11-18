@@ -7,7 +7,6 @@ import javax.persistence.Id;
 
 @Entity
 public class Role {
-
 	@Id
 	private int id;
 	private String  name;
@@ -32,5 +31,8 @@ public class Role {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+	@Override
+	public String toString() {
+		return "Role [id=" + id + ", name=" + name + "]";
+	}
 }

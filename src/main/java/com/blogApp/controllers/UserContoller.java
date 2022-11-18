@@ -28,6 +28,11 @@ public class UserContoller {
 	@Autowired
 	private UserService userService;
 	
+	public UserContoller(UserService userService) {
+		super();
+		this.userService = userService;
+	}
+
 	@PostMapping("/createuser")
 	public ResponseEntity<UserDto> createUser(@Valid @RequestBody UserDto userDto){
 		UserDto createUser = this.userService.createUser(userDto);
@@ -37,30 +42,32 @@ public class UserContoller {
 	@PutMapping("/updateuser/{userId}")
 	public ResponseEntity<UserDto> updateUser(@RequestBody UserDto userDto ,@PathVariable Integer userId){
 		UserDto updateUser = this.userService.UpdateUser(userDto,userId);
+		System.out.println("updateUser:::::->"+updateUser);
 		return new ResponseEntity<UserDto>(updateUser,HttpStatus.CREATED);
 	}
 	@PreAuthorize("hasRole('ADMIN')")
 	@DeleteMapping("/deleteuser/{userId}")
 	public ResponseEntity<ApiResponse> DeleteUser(@PathVariable Integer userId){
-		this.userService.DeleteUSer(userId);
+		String deleteUSer = this.userService.DeleteUSer(userId);
 		ApiResponse apiResponse = new ApiResponse("user deleted sucessfully", true);
-		return new ResponseEntity<ApiResponse>(apiResponse,HttpStatus.CREATED);
+		return new ResponseEntity<ApiResponse>(apiResponse,HttpStatus.FOUND);
 	}
 	@GetMapping("/getuser/{userId}")
-	public ResponseEntity<UserDto> getuser(@PathVariable Integer userId){
+	public ResponseEntity<UserDto> getUser(@PathVariable Integer userId){
 		UserDto userDto = this.userService.getUSer(userId);
+		userDto.setPassword("Hidden");
 		return new ResponseEntity<UserDto>(userDto,HttpStatus.FOUND);
 	}
 	@GetMapping("/getallusers")
-	public ResponseEntity<List<UserDto>> getAlluser(){
-		 List<UserDto> allUSers = this.userService.getAllUSers();
+	public ResponseEntity<List<UserDto>> getAllUser(){
+		 List<UserDto> allUSers = this.userService.getAllUsers();
 		return new ResponseEntity<List<UserDto>>(allUSers,HttpStatus.FOUND);
 	}
 	
-	//registerNerUser
 	@PostMapping("/register")
 	public ResponseEntity<UserDto> registerUser(@RequestBody UserDto userDto){
-		UserDto registerUser = this.userService.registerUser(userDto);
+		int roleId =502;
+		UserDto registerUser = this.userService.registerUser(userDto,roleId);
 		return new ResponseEntity<UserDto>(registerUser,HttpStatus.CREATED);
 	}
 }
