@@ -39,7 +39,7 @@ public class BlogApplication2Application implements CommandLineRunner{
 	public void run(String... args) throws Exception {
 
 		System.out.println(this.encoder.encode("ABC"));
-		System.out.println("New Line");
+		System.out.println("user story");
 		try {
 	             Role role = new Role();
 	             role.setId(501);
