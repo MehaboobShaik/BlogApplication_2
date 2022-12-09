@@ -170,11 +170,7 @@ public class User  implements UserDetails{
 		// TODO Auto-generated method stub
 		return true;
 	}
-//	@Override
-//	public String toString() {
-//		return "User [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password + ", about=" + about
-//				+ "]";
-//	}
+
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password + ", about=" + about
