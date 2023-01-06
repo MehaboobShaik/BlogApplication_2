@@ -34,7 +34,7 @@ public class BlogApplication2Application implements CommandLineRunner{
 	public void run(String... args) throws Exception {
 
 		System.out.println(this.encoder.encode("ABC"));
-		System.out.println("local branch");
+	    System.out.println("new changes");
 		try {
 	             Role role = new Role();
 	             role.setId(501);
