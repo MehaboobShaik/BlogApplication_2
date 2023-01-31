@@ -2,6 +2,7 @@ package com.blogApp.serviceImpl;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -113,7 +114,11 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public UserDto registerUser(UserDto userDto,Integer RoleId) {
 
-		Role role = roleRespository.findById(RoleId).get();
+		Optional<Role> optionalRole = roleRespository.findById(RoleId);
+		Role role =null;
+		if(optionalRole.isPresent()) {
+			role = optionalRole.get();
+		}
 		User user = this.modelMapper.map(userDto, User.class);
 		user.setPassword(this.encoder.encode(userDto.getPassword()));
 		user.getRoleSet().add(role);

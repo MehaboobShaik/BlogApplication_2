@@ -29,12 +29,6 @@ public class BlogApplication2Application implements CommandLineRunner{
 	public ModelMapper modelMapper() {
 	    return new ModelMapper();
 	}
-//	@Bean
-//	public MockMvc mockMvc() {
-//	    return new MockMvc();
-//	}
-
-
 	@Override
 	public void run(String... args) throws Exception {
 
