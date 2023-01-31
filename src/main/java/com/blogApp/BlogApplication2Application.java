@@ -29,11 +29,15 @@ public class BlogApplication2Application implements CommandLineRunner{
 	public ModelMapper modelMapper() {
 	    return new ModelMapper();
 	}
+<<<<<<< HEAD
+=======
+	
+>>>>>>> 0f1dddb79fc24b766c073fcff4fcf0f10490ff01
 	@Override
 	public void run(String... args) throws Exception {
 
 		System.out.println(this.encoder.encode("ABC"));
-		System.out.println("local branch");
+	    System.out.println("new changes");
 		try {
 	             Role role = new Role();
 	             role.setId(501);
