@@ -29,10 +29,6 @@ public class BlogApplication2Application implements CommandLineRunner{
 	public ModelMapper modelMapper() {
 	    return new ModelMapper();
 	}
-<<<<<<< HEAD
-=======
-	
->>>>>>> 0f1dddb79fc24b766c073fcff4fcf0f10490ff01
 	@Override
 	public void run(String... args) throws Exception {
 
